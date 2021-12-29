@@ -1,3 +1,7 @@
+// Ghost Custom Integration Parameters
+const ghostUrl = "CUSTOM_INTEGRATION_API_URL";
+const ghostKey = "CUSTOM_INTEGRATION_CONTENT_API_KEY";
+
 const fs = require("fs");
 const GhostContentAPI = require("@tryghost/content-api");
 var jsonObject = {
@@ -139,8 +143,8 @@ createArticles();
 
 function createArticles() {
   const api = new GhostContentAPI({
-    url: "https://why-choose-apple.ghost.io",
-    key: "00408a8f1546373c59ba6b0f3f",
+    url: ghostUrl,
+    key: ghostKey,
     version: "v3",
   });
   // fetch 5 posts, including related tags and authors
@@ -149,14 +153,7 @@ function createArticles() {
     .then((posts) => {
       var articles = [];
       for (let i = 0; i < posts.length; i++) {
-        const element = posts[i];
-        if (
-          element.title != "Newsletter" &&
-          element.title != "About Why Choose Apple" &&
-          element.title != "Tags"
-        ) {
-          articles.push(element);
-        }
+        articles.push(element);
       }
 
       articles.forEach((post) => {
@@ -179,8 +176,7 @@ function writeArticle(post) {
   newJSONObject.components[0].text = post.title;
   newJSONObject.metadata.thumbnailURL = post.feature_image;
   newJSONObject.components[1].style.fill.url = post.feature_image;
-  newJSONObject.components[2].text =
-    "Armaan Ahmed | " + post.created_at.split("T")[0];
+  newJSONObject.components[2].text = post.created_at.split("T")[0];
   const path = "./" + post.title + "/article.json";
   fs.writeFile(
     path,
@@ -193,10 +189,7 @@ function writeArticle(post) {
       const { execSync } = require("child_process");
       const newtitle = post.title.replace(/ /g, "\\ ");
       const finishedTitle = newtitle.replace(/'/g, "\\'");
-      const output = execSync(
-        "papi-client article publish /Users/armaan/Xcode/Articles/" +
-          finishedTitle
-      );
+      const output = execSync("papi-client article publish " + finishedTitle);
       console.log("Success Uploading!");
     }
   );
