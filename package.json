@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@tryghost/content-api": "^1.5.16"
+  }
+}
