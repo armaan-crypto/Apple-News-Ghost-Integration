@@ -19,7 +19,7 @@ To use the Apple News API, do the following:
 
     gem install rails -v 4.2.2
 
-    sudo gem install Apple-News-API-CLI/papi-client-1.10.4.gem
+    sudo gem install papi-client-1.10.4.gem
 
 If the commands are not successful, check that you have Xcode installed. If you don't, you can download it from the App Store.
 
