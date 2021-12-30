@@ -153,7 +153,7 @@ function createArticles() {
     .then((posts) => {
       var articles = [];
       for (let i = 0; i < posts.length; i++) {
-        articles.push(element);
+        articles.push(posts[i]);
       }
 
       articles.forEach((post) => {
@@ -190,7 +190,7 @@ function writeArticle(post) {
       const newtitle = post.title.replace(/ /g, "\\ ");
       const finishedTitle = newtitle.replace(/'/g, "\\'");
       const output = execSync("papi-client article publish " + finishedTitle);
-      console.log("Success Uploading!");
+      console.log("Success Uploading Article");
     }
   );
 }
